@@ -1,17 +1,259 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #444;
+    }
+
+    .navbar .container {
+      width: 1340px;
+      margin: auto;
+      padding: 0;
+    }
+
+    .navbar .container img {
+      width: 120px;
+      margin-top: 5px;
+    }
+
+    .navbar .container input {
+      margin-left: 20px;
+      margin-bottom: 15px;
+      height: 28px;
+      width: 238px;
+      border-radius: 15px;
+      background-color: #888;
+      border: none;
+    }
+
+    .navbar .container ul {
+      float: right;
+    }
+
+    .navbar .container ul li {
+      float: left;
+      line-height: 59px;
+    }
+
+    .navbar .container ul li a {
+      text-shadow: none;
+      color: #ccc;
+      padding: 10px 15px;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    body {
+      background-color: #e1e1e1;
+    }
+
+    .header {
+      background-color: white;
+      width: 978px;
+      margin-left: 95px;
+    }
+
+    .title {
+      overflow: hidden;
+      background-color: #f6f6f6;
+      width: 1039px;
+      padding: 20px 0 20px 10px;
+    }
+
+    .title li {
+      float: left;
+      margin: 0 10px;
+    }
+
+    .title li a {
+      text-decoration: none;
+      color: #369219;
+      padding: 2px 5px;
+    }
+
+    .title li .active {
+      font-size: 16px;
+      background-color: #369219;
+      color: white;
+      border-radius: 5px;
+    }
+
+    .content {
+      width: 1049px;
+      background-color: white;
+    }
+
+    .content li {
+      line-height: 50px;
+      border-bottom: 1px solid #ebe8e8;
+      padding: 0 20px;
+    }
+
+    .content img {
+      width: 30px;
+      height: 30px;
+      border-radius: 3px;
+      margin-bottom: -10px;
+    }
+
+    .content .top {
+      background-color: #369219;
+      color: white;
+      padding: 2px 5px;
+      font-size: 12px;
+    }
+
+    .content .other {
+      background-color: #e5e5e5;
+      color: #999;
+      padding: 2px 4px;
+      font-size: 12px;
+    }
+
+    .content .time {
+      float: right;
+    }
+
+    .content li:hover {
+      background-color: #f6f6f6;
+    }
+
+    .content a {
+      text-decoration: none;
+      display: inline-block;
+      color: #333;
+      width: 656px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      line-height: 16px;
+      margin-bottom: -2px;
+    }
+
+    .content a:hover {
+      text-decoration: underline;
+    }
+
+    .content .reply_count {
+      color: #9e78c0;
+      font-size: 13px;
+    }
+
+    .content .visit_count {
+      font-size: 10px;
+      color: #b4b4b4;
+    }
+
+    .content .number {
+      display: inline-block;
+      width: 65px;
+      text-align: center;
+    }
+
+    .page {
+      padding: 0 20px;
+      width: 1009px;
+      background-color: white;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .page li {
+      float: left;
+    }
+
+    .page li a {
+      float: left;
+      padding: 4px 12px;
+      line-height: 20px;
+      text-decoration: none;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-left-width: 0;
+      color: #778087;
+    }
+
+    .page li a:nth-of-type(1) {
+      border-left: 1px solid #ddd;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+  </noscript>
+  <div id="app">
+    <div class="navbar">
+      <div class="container">
+        <img src="//static2.cnodejs.org/public/images/cnodejs_light.svg">
+        <input type="text">
+        <ul>
+          <li><a href="">首页</a></li>
+          <li><a href="">新手入门</a></li>
+          <li><a href="">API</a></li>
+          <li><a href="">关于</a></li>
+          <li><a href="">注册</a></li>
+          <li><a href="">登录</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="header">
+      <ul class="title">
+        <li><a :class="tab == 'all' ? 'active': ''" @click="fetchMessage('all')" ref="all">全部</a></li>
+        <li><a :class="tab == 'good' ? 'active': ''" @click="fetchMessage('good')">精华</a></li>
+        <li><a :class="tab == 'share' ? 'active': ''" @click="fetchMessage('share')">分享</a></li>
+        <li><a :class="tab == 'ask' ? 'active': ''" @click="fetchMessage('ask')">问答</a></li>
+        <li><a :class="tab == 'job' ? 'active': ''" @click="fetchMessage('job')">招聘</a></li>
+      </ul>
+      <ul class="content">
+        <li v-for="item in message.data">
+          <img :src="item.author.avatar_url" alt="">
+          <div class="number">
+            <span class="reply_count">{{item.reply_count}}</span>/<span class="visit_count">{{item.visit_count}}</span>
+          </div>
+          <span v-if="item.top" class="top">置顶</span>
+          <span v-else class="other">{{item.tab | sinicized}}</span>
+          <span class="limitWidth"><a :href="item.id">{{item.title}}</a></span>
+          <span class="time">{{item.last_reply_at | nowTime}}</span>
+        </li>
+      </ul>
+      <ul class="page">
+        <li><a @click="fetchMessage(tab)"><<</a></li>
+        <li><a @click="fetchMessage(tab)">1</a></li>
+        <li><a @click="fetchMessage(tab,2)">2</a></li>
+        <li><a @click="fetchMessage(tab,3)">3</a></li>
+        <li><a @click="fetchMessage(tab,4)">4</a></li>
+        <li><a @click="fetchMessage(tab,5)">5</a></li>
+        <li><a href="">...</a></li>
+        <li><a @click="fetchMessage(tab,19)">>></a></a></a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
